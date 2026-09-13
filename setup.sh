@@ -24,6 +24,6 @@ cat ~/.ssh/id_ed25519.pub
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
 bash ~/miniconda.sh -b -p $HOME/.miniconda3
 rm ~/miniconda.sh
-~/.miniconda/bin/conda init bash
+~/.miniconda3/bin/conda init bash
 source ~/.bashrc
 conda config --set auto_activate_base false
