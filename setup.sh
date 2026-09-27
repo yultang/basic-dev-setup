@@ -27,3 +27,30 @@ rm ~/miniconda.sh
 ~/.miniconda3/bin/conda init bash
 source ~/.bashrc
 conda config --set auto_activate_base false
+
+# Extend disk storage size
+sudo fdisk /dev/sda <<EOF
+n
+
+
+
+w
+EOF
+
+sudo partprobe /dev/sda
+sleep 2
+
+sudo mkfs.ext4 -F /dev/sda4
+sudo tune2fs -m 0 /dev/sda4
+
+mkdir -p ~/sda
+sudo mount /dev/sda4 ~/sda
+sudo chown -R $USER:$(id -gn) ~/sda
+
+UUID=$(sudo blkid -s UUID -o value /dev/sda4)
+if ! grep -q "$UUID" /etc/fstab; then
+  echo "UUID=$UUID $HOME/sda ext4 defaults 0 2" | sudo tee -a /etc/fstab
+fi
+
+df -h ~/sda
+
