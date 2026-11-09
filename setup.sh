@@ -7,7 +7,7 @@ sudo apt update || echo "Warning: apt update encountered minor issues, continuin
 echo "==> 2. Installing basic build tools..."
 sudo apt install -y build-essential gcc g++ gdb make cmake git \
     flex bison bc libelf-dev libssl-dev libncurses-dev dwarves \
-    pkg-config ccache zstd parted clangd|| { echo "Failed to install some build tools, continuing..."; }
+    pkg-config ccache zstd parted clangd || { echo "Failed to install some build tools, continuing..."; }
 
 echo "==> 3. Installing kernel profiling & BPF dependencies..."
 sudo apt install -y \
